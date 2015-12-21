@@ -20,7 +20,7 @@
 <meta property="og:image" content="http://yoursite.com/2015_12_20_1.png">
 <meta property="og:image" content="http://yoursite.com/2015_12_20_img\2015_12_20_2.png">
 <meta property="og:image" content="http://yoursite.com/img\2015_12_20_3.png">
-<meta property="og:updated_time" content="2015-12-20T06:12:19.618Z">
+<meta property="og:updated_time" content="2015-12-21T11:11:20.973Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="c语言编译和调用dll">
 <meta name="twitter:description" content="由于主持朗讯杯，所以关于第二轮的ai对抗竞技平台就不得不又我出手了。在搞到一般的时候。突然意识到需要分享和记录。所以在此记录。">
@@ -101,7 +101,7 @@
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目錄</strong>
 		
-			
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#制作c语言的dll"><span class="toc-number">1.</span> <span class="toc-text">制作c语言的dll</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#制作c语言程序来调用dll"><span class="toc-number">2.</span> <span class="toc-text">制作c语言程序来调用dll</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#运行结果"><span class="toc-number">3.</span> <span class="toc-text">运行结果</span></a></li></ol>
 		
 		</div>
 		
@@ -109,19 +109,16 @@
 <a id="more"></a>
 <p>##为什么用dll</p>
 <p>dll相当于动态头文件，主程序需要调用一些函数，这些函数写在dll里面，<br>主程序在没有dll的时候也会编译成功产生exe。<br>在指定路径位置没有dll的时候他会在运行的时候按你的方式提醒。<br>只需要在指定位置直接放个dll就行能正确运行了， 不用编译什么的、</p>
-<p>##制作c语言的dll</p>
-<p>做一个dll相当于做一个dll工程，codebolcks是直接建这个工程基本都就差不多了，会自动有一个main.h 和 main.c。<br>main.c是写函数的地方，main.h是进行一些声明以及声明main.c中的函数。<br>注意main.c(cpp),中的头文件一定要有一句 #include”main.h”<br>当然名字不一定用main</p>
+<h2 id="制作c语言的dll">制作c语言的dll</h2><p>做一个dll相当于做一个dll工程，codebolcks是直接建这个工程基本都就差不多了，会自动有一个main.h 和 main.c。<br>main.c是写函数的地方，main.h是进行一些声明以及声明main.c中的函数。<br>注意main.c(cpp),中的头文件一定要有一句 #include”main.h”<br>当然名字不一定用main</p>
 <p style="font-family:verdana;font-size:100%;color:green" align="left">下面是main.cpp的代码，以加和函数为例</p>
 
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#include&lt;stdio.h&gt;</span></span><br><span class="line"><span class="comment">#include&lt;string.h&gt;</span></span><br><span class="line"><span class="comment">#include "main.h"</span></span><br><span class="line"></span><br><span class="line">int summ(int x,int y)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">return</span> x+y;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p style="font-family:verdana;font-size:100%;color:green" align="left">下面是main.h的代码</p>
 
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#ifndef __MAIN_H__</span></span><br><span class="line"><span class="comment">#define __MAIN_H__</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#include &lt;windows.h&gt;</span></span><br><span class="line"></span><br><span class="line">/*  To use this exported <span class="keyword">function</span> of dll, include this header</span><br><span class="line"> *  <span class="keyword">in</span> your project.</span><br><span class="line"> */</span><br><span class="line"><span class="comment">#ifdef BUILD_DLL</span></span><br><span class="line">    <span class="comment">#define DLL_EXPORT __declspec(dllexport)</span></span><br><span class="line"><span class="comment">#else</span></span><br><span class="line">    <span class="comment">#define DLL_EXPORT __declspec(dllimport)</span></span><br><span class="line"><span class="comment">#endif</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#ifdef __cplusplus</span></span><br><span class="line">extern <span class="string">"C"</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="comment">#endif</span></span><br><span class="line"></span><br><span class="line">int DLL_EXPORT summ(int x,int y);</span><br><span class="line"></span><br><span class="line"><span class="comment">#ifdef __cplusplus</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">#endif</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#endif // __MAIN_H__</span></span><br></pre></td></tr></table></figure>
-<p>##制作c语言程序来调用dll</p>
-<p>这个程序和正常的一般exe程序框架一样，只是多一些声明和调用，具体看程序中注释。<br>上代码，与上面那个配套。</p>
+<h2 id="制作c语言程序来调用dll">制作c语言程序来调用dll</h2><p>这个程序和正常的一般exe程序框架一样，只是多一些声明和调用，具体看程序中注释。<br>上代码，与上面那个配套。</p>
 <figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">#include&#60;stdio.h&#62;&#10;#include&#60;string.h&#62;&#10;#include&#60;windows.h&#62;&#10;&#10;&#10;typedef int (*dll_fun)(int, int);//&#27880;&#24847;&#36825;&#37324;&#26377;&#20010;&#22768;&#26126;&#24418;&#21442;&#30340;&#22320;&#26041;&#65292;&#32780;&#19988;&#36825;&#21477;&#35805;&#24847;&#20041;&#20160;&#20040;&#65292;&#20197;&#21518;&#35201;&#28145;&#31350;&#12290;&#10;&#10;int main()&#10;&#123;&#10;    HMODULE HDLL;&#10;    HDLL = LoadLibrary(&#34;thedll&#34;);//&#36825;&#20010;&#20301;&#32622;&#26159;dll&#25991;&#20214;&#30340;&#30456;&#23545;&#20301;&#32622;&#65292;&#36825;&#20010;&#24847;&#24605;&#26159;&#22312;&#21516;&#25991;&#20214;&#22841;&#10;&#10;    if(HDLL==NULL)//&#20986;&#38169;&#22788;&#29702;&#12290;&#10;    &#123;&#10;        printf(&#34;load library fail!\n&#34;);&#10;        FreeLibrary(HDLL);&#10;        getchar();&#10;        return 0;&#10;    &#125;&#10;    dll_fun thefun;&#10;&#10;    thefun=(dll_fun)GetProcAddress(HDLL,&#34;summ&#34;);//&#22312;&#36825;&#37324;&#22768;&#26126;dll&#20989;&#25968;&#21517;&#23383;&#10;&#10;    while(1)//&#21487;&#20197;&#20351;&#29992;&#20102;&#10;    &#123;&#10;        int a,b;&#10;        scanf(&#34;%d%d&#34;,&#38;a,&#38;b);&#10;        printf(&#34;%d==\n&#34;,thefun(a,b));&#10;    &#125;&#10;    getchar();&#10;    return 0;&#10;&#125;</span><br></pre></td></tr></table></figure>
-<p>##运行结果</p>
-<p>主程序工程会生成一个exe。直接点exe（注意在return 0之前加getchar才能看到效果）运行。</p>
+<h2 id="运行结果">运行结果</h2><p>主程序工程会生成一个exe。直接点exe（注意在return 0之前加getchar才能看到效果）运行。</p>
 <p>如果指定路径（这里是同一个文件夹）中没有dll的话。，会走if加载失败那个语句。<br>有的话直接就会运行了。</p>
 <p>dll是直接在那个dll工程编译好之后，在bin里会生成一个dll。直接粘过去就能用了。</p>
 <!--（这里插入一句话，就是html编辑图片格式  <img src="图片的路径" width="" height="" alt="" title="" align=""></img>） -->
@@ -184,7 +181,7 @@
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目錄</strong>
  
- 
+ <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#制作c语言的dll"><span class="toc-number">1.</span> <span class="toc-text">制作c语言的dll</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#制作c语言程序来调用dll"><span class="toc-number">2.</span> <span class="toc-text">制作c语言程序来调用dll</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#运行结果"><span class="toc-number">3.</span> <span class="toc-text">运行结果</span></a></li></ol>
  
   </div>
 
