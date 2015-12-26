@@ -1,0 +1,519 @@
+
+ <!DOCTYPE HTML>
+<html >
+<head>
+  <meta charset="UTF-8">
+  
+    <title>对抗蛇规则 | cnilin_blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="cnilinx">
+    
+
+    
+    <meta name="description" content="对抗蛇规则通识：1.选手双方各自控制一条蛇，分别由左下角与右下角出发。轮流决策下一步如何走。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="对抗蛇规则">
+<meta property="og:url" content="http://yoursite.com/2015/12/23/对抗蛇规则/index.html">
+<meta property="og:site_name" content="cnilin_blog">
+<meta property="og:description" content="对抗蛇规则通识：1.选手双方各自控制一条蛇，分别由左下角与右下角出发。轮流决策下一步如何走。">
+<meta property="og:updated_time" content="2015-12-26T11:26:14.207Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="对抗蛇规则">
+<meta name="twitter:description" content="对抗蛇规则通识：1.选手双方各自控制一条蛇，分别由左下角与右下角出发。轮流决策下一步如何走。">
+
+    
+    <link rel="alternative" href="/atom.xml" title="cnilin_blog" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/jacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/jacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.png" alt="cnilin_blog" title="cnilin_blog"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="cnilin_blog">cnilin_blog</a></h1>
+				<h2 class="blog-motto"></h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜單">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">beaut</a></li>
+					
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+						<li><a href="/about">About</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:yoursite.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/12/23/对抗蛇规则/" title="对抗蛇规则" itemprop="url">对抗蛇规则</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="cnilinx" target="_blank" itemprop="author">cnilinx</a>
+		
+  <p class="article-time">
+    <time datetime="2015-12-23T13:58:00.000Z" itemprop="datePublished"> 發表於 2015-12-23</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目錄</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#对抗蛇规则通识："><span class="toc-number">1.</span> <span class="toc-text">对抗蛇规则通识：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#特殊情况请注意："><span class="toc-number">2.</span> <span class="toc-text">特殊情况请注意：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#自言自语"><span class="toc-number">3.</span> <span class="toc-text">自言自语</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#接口和编程要求"><span class="toc-number">4.</span> <span class="toc-text">接口和编程要求</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-队员上交为dll动态链接文件。"><span class="toc-number">4.1.</span> <span class="toc-text">1.队员上交为dll动态链接文件。</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-队员程序要求："><span class="toc-number">4.2.</span> <span class="toc-text">2.队员程序要求：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#giveplayer结构体"><span class="toc-number">4.3.</span> <span class="toc-text">giveplayer结构体</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#snack_结构体"><span class="toc-number">4.4.</span> <span class="toc-text">snack 结构体</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#point结构体"><span class="toc-number">4.5.</span> <span class="toc-text">point结构体</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#一个较为拙劣的实例代码"><span class="toc-number">4.5.1.</span> <span class="toc-text">一个较为拙劣的实例代码</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#请注意"><span class="toc-number">4.6.</span> <span class="toc-text">请注意</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#评分细则。"><span class="toc-number">4.7.</span> <span class="toc-text">评分细则。</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#提交方法见群通知。欢迎留言。欢迎喷。"><span class="toc-number">5.</span> <span class="toc-text">提交方法见群通知。欢迎留言。欢迎喷。</span></a></li></ol>
+		
+		</div>
+		
+		<h2 id="对抗蛇规则通识：">对抗蛇规则通识：</h2><p>1.选手双方各自控制一条蛇，分别由左下角与右下角出发。轮流决策下一步如何走。</p>
+<a id="more"></a>
+<p>2.不论咬住自己还是 咬住对手还是咬住地图边界均视为死亡，蛇立刻从场上消失，不占空间。存活蛇继续完成游戏。</p>
+<p>3．被吃的食物不超过71个。吃完食物结束对局结算蛇长度，长的为胜利者。食物会在每次总步数200的整数倍的时候变换一次位置。</p>
+<p>4.非正常结局：<br>两蛇均死亡，结束游戏并比较蛇长。<br>两蛇在10000步以后尚未结束游戏，结束游戏，并计算蛇长。</p>
+<p>5.蛇变长规则。吃到食物之后，在接下来的一步，蛇尾不缩。从而使得身体长度加一。特别注意，蛇在朝前状态下收到朝后移动的指令会立即死亡。</p>
+<h2 id="特殊情况请注意：">特殊情况请注意：</h2><ol>
+<li><p>蛇的初始长度为二，当蛇的长度为二的时候，蛇朝“后”走，不会导致死亡，因为此时头在走向尾巴的时候，尾巴刚好处于头的位置。但是当蛇身长度大于二的时候，朝后走会直接导致蛇的死亡。</p>
+</li>
+<li><p>总步数的计算方法为，每次每个队员走一步，总步数加一。也就是说，单个选手的程序在决策100次之后，总步数为200。</p>
+</li>
+<li><p>每当总步数到200的时候，食物位置会重新生成到一个位置，所以再吃食物的时候请考虑距离下次食物重生的时间。</p>
+</li>
+</ol>
+<h2 id="自言自语">自言自语</h2><p>1.本次比赛中，总步数是有限制的，10000步，而每200步会自动生成一个新的位置。可以利用这点巧妙的扩大优势。比如占优情况下围住食物而不吃，拖延时间。在自动生成新食物之前吃掉食物。这样可以使比赛以总步数限制结束，从而扩大优势。</p>
+<p>2.计算蛇到食物的距离和路径并非那么简单，因为主动撞到对手的蛇，会导致死亡，如果此时对手位于比较好的位置，可以以自己身体对你进行“卡位”。所以，很多人会以为这个主题和贪吃蛇差不多，其实区别非常大，还在考虑“深搜最短路”，“舌头到尾的永久通路”就真out了。</p>
+<p>3.哎。都是算计，假设a队员离此时的食物比较近，而食物比较靠边。b队员蛇可以“包围”角落。最终让a队员虽然吃到了食物，却死在了那里。</p>
+<h2 id="接口和编程要求">接口和编程要求</h2><h3 id="1-队员上交为dll动态链接文件。">1.队员上交为dll动态链接文件。</h3><p>（不会写dll？其实很简单，我为大家谢了一个简单够用的编辑方法，大家也可以自己网上查找方法）。</p>
+<p>  <a style="font-family:verdana;font-size:100%;color:green" align="left" href="http://cnilin15.github.io/2015/12/20/c%E8%AF%AD%E8%A8%80%E7%BC%96%E8%AF%91%E5%92%8C%E8%B0%83%E7%94%A8dll/#more" target="_blank" rel="external"> 我写的dll编辑方法，点击此链接</a></p>
+<h3 id="2-队员程序要求：">2.队员程序要求：</h3><p>1.队员需提交两个dll。分别作为两个player。（就是自己的同样的代码，把dll文件名和其中函数名字改一下并编译就可以了）</p>
+<p>2.两个dll的文件名格式分别为　“队伍名字_player1.dll” 和“队伍名字_player2.dll”。。其中队伍名称均用英文名称（如果本来是中文，则临时起个英文的，并写thename.txt文件标明是哪个队伍的）。</p>
+<p>3.在player1中要求队员编写的函数声明为：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">int player_1(giveplayer )</span><br></pre></td></tr></table></figure>
+<p>  在player2中要求队员编写的函数声明为：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">int player_2(giveplayer )</span><br></pre></td></tr></table></figure>
+<p>函数的返回一个int型将作为策略，其中0代表向上，1代表向右，2代表向下，3代表向左。其余将导致蛇的死亡。</p>
+<p>4.队员可调用到形参类 giveplayer 从而获得当前比赛的局势，其中 giveplayer的类文件会在分发的 “uselei.h”中。uselei.h的代码如下</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">#ifndef USELEI_H_INCLUDED</span></span><br><span class="line"><span class="comment">#define USELEI_H_INCLUDED</span></span><br><span class="line"></span><br><span class="line">class point</span><br><span class="line">&#123;</span><br><span class="line">public:</span><br><span class="line">    int x,y;</span><br><span class="line">    point operator +(point s)</span><br><span class="line">    &#123;</span><br><span class="line">        point pp;</span><br><span class="line">        pp.x=s.x+x;</span><br><span class="line">        pp.y=s.y+y;</span><br><span class="line">        <span class="built_in">return</span> pp;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">class snack</span><br><span class="line">&#123;</span><br><span class="line">public:</span><br><span class="line">    point body[<span class="number">70</span>];</span><br><span class="line">    int tail;</span><br><span class="line">    int head;</span><br><span class="line">    int bodylen;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">class giveplayer</span><br><span class="line">&#123;</span><br><span class="line">public:</span><br><span class="line">    int smap[<span class="number">40</span>][<span class="number">40</span>];</span><br><span class="line">    snack p1;</span><br><span class="line">    snack p2;</span><br><span class="line">    point food;</span><br><span class="line">    int mpsize;</span><br><span class="line">&#125;playerget;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">#endif // USELEI_H_INCLUDED</span></span><br></pre></td></tr></table></figure>
+<p>其中：</p>
+<h3 id="giveplayer结构体">giveplayer结构体</h3><p>smap :为当前的局势数组。其中数字1组成一条蛇，数字3组成另一条蛇，数字2是食物。<br>p1和p2：分别是两人蛇的状态，类型为snack。<br>food：为当前食物坐标。<br>mapsize：为地图尺寸。</p>
+<h3 id="snack_结构体">snack 结构体</h3><p>bodylen :当前蛇的长度。<br>body ：当前蛇身个点的坐标。<br>head :为头部在body中的位置（其实恒为零）。<br>tail ：为尾部在body中的位子。</p>
+<h3 id="point结构体">point结构体</h3><p>不多说，x，y，分别代表。x，y坐标。</p>
+<h4 id="一个较为拙劣的实例代码">一个较为拙劣的实例代码</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">int player_1(giveplayer s)</span><br><span class="line">&#123;</span><br><span class="line">   </span><br><span class="line">    <span class="built_in">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line">够拙劣~~</span><br></pre></td></tr></table></figure>
+<h3 id="请注意">请注意</h3><p>1.在队员编写dll中c文件时，头文件请包含 #include “uselei.h”。</p>
+<p>2.如果在一次队员函数的调用中，队员函数运行时间超过1秒，将直接判死亡。</p>
+<h3 id="评分细则。">评分细则。</h3><p>队员上交dll将两两互相对抗，胜者获得一分，败者获得零分。<br>如果是平局，则都不得分。<br>最终以得分排序。</p>
+<h2 id="提交方法见群通知。欢迎留言。欢迎喷。">提交方法见群通知。欢迎留言。欢迎喷。</h2><p>在下菜鸡一枚，就算多遍检查，程序有bug在所难免。如果万一有问题，将在群里更新程序版本。也请各位大牛原谅。</p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/程序随笔/">程序随笔</a>
+  </div>
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="http://yoursite.com/2015/12/23/对抗蛇规则/" data-title="对抗蛇规则 | cnilin_blog" data-tsina="null" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2015/12/23/随笔/" title="随笔">
+  <strong>上一篇：</strong><br/>
+  <span>
+  随笔</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2015/12/20/c语言编译和调用dll/"  title="c语言编译和调用dll">
+ <strong>下一篇：</strong><br/> 
+ <span>c语言编译和调用dll
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+<section id="comments" class="comment">
+	<div class="ds-thread" data-thread-key="2015/12/23/对抗蛇规则/" data-title="对抗蛇规则" data-url="http://yoursite.com/2015/12/23/对抗蛇规则/"></div>
+</section>
+
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="顯示側邊欄"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目錄</strong>
+ 
+ <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#对抗蛇规则通识："><span class="toc-number">1.</span> <span class="toc-text">对抗蛇规则通识：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#特殊情况请注意："><span class="toc-number">2.</span> <span class="toc-text">特殊情况请注意：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#自言自语"><span class="toc-number">3.</span> <span class="toc-text">自言自语</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#接口和编程要求"><span class="toc-number">4.</span> <span class="toc-text">接口和编程要求</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-队员上交为dll动态链接文件。"><span class="toc-number">4.1.</span> <span class="toc-text">1.队员上交为dll动态链接文件。</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-队员程序要求："><span class="toc-number">4.2.</span> <span class="toc-text">2.队员程序要求：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#giveplayer结构体"><span class="toc-number">4.3.</span> <span class="toc-text">giveplayer结构体</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#snack_结构体"><span class="toc-number">4.4.</span> <span class="toc-text">snack 结构体</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#point结构体"><span class="toc-number">4.5.</span> <span class="toc-text">point结构体</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#一个较为拙劣的实例代码"><span class="toc-number">4.5.1.</span> <span class="toc-text">一个较为拙劣的实例代码</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#请注意"><span class="toc-number">4.6.</span> <span class="toc-text">请注意</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#评分细则。"><span class="toc-number">4.7.</span> <span class="toc-text">评分细则。</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#提交方法见群通知。欢迎留言。欢迎喷。"><span class="toc-number">5.</span> <span class="toc-text">提交方法见群通知。欢迎留言。欢迎喷。</span></a></li></ol>
+ 
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隱藏側邊欄"></a></div>
+<aside class="clearfix">
+
+  
+
+
+  
+
+  
+<div class="tagslist">
+	<p class="asidetitle">標簽</p>
+		<ul class="clearfix">
+		
+			
+				<li><a href="/tags/三维空间/" title="三维空间">三维空间<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/程序随笔/" title="程序随笔">程序随笔<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/生活五味/" title="生活五味">生活五味<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/数据结构/" title="数据结构">数据结构<sup>1</sup></a></li>
+			
+		
+		</ul>
+</div>
+
+
+  <div class="linkslist">
+  <p class="asidetitle">友情鏈接</p>
+    <ul>
+        
+          <li>
+            
+            	<a href="https://coderq.com" target="_blank" title="一个面向程序员交流分享的新一代社区">码农圈</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://wuchong.me" target="_blank" title="Jark&#39;s Blog">Jark&#39;s Blog</a>
+            
+          </li>
+        
+    </ul>
+</div>
+
+  
+
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS 訂閱</a>
+</div>
+
+  <div class="weiboshow">
+  <p class="asidetitle">新浪微博</p>
+    <iframe width="100%" height="119" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=119&fansRow=2&ptype=1&speed=0&skin=9&isTitle=1&noborder=1&isWeibo=0&isFans=0&uid=null&verifier=b3593ceb&dpc=1"></iframe>
+</div>
+
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> Hello ,I&#39;m cnilin  ~ ~ Science is my favorite <br/>
+			This is my blog,  my CN name is Li_Guangming.</p>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		<a href="http://weibo.com/5063081025" target="_blank" class="icon-weibo" title="微博"></a>
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2015 
+		
+		<a href="/about" target="_blank" title="cnilinx">cnilinx</a>
+		
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<div class="hoverqrcode clearfix"></div>',
+  '<a class="overlay" id="qrcode"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+
+  $('.hoverqrcode').hide();
+
+  var myWidth = 0;
+  function updatehoverqrcode(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+    var qrsize = myWidth > 1024 ? 200:100;
+    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
+    var p = $('.article-share-qrcode').position();
+    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
+                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
+                          .qrcode(options);
+  };
+  $(window).resize(function(){
+    $('.hoverqrcode').hide();
+  });
+  $('.article-share-qrcode').click(function(){
+    updatehoverqrcode();
+    $('.hoverqrcode').toggle();
+  });
+  $('.article-share-qrcode').hover(function(){}, function(){
+      $('.hoverqrcode').hide();
+  });
+});   
+</script>
+
+
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"cnilin"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script> 
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+
+
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3Fe6d1f421bbc9962127a50488f9ed37d1' type='text/javascript'%3E%3C/script%3E"));
+</script>
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回頂部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>
