@@ -17,7 +17,7 @@
 <meta property="og:url" content="http://yoursite.com/2015/12/26/对抗蛇规则/index.html">
 <meta property="og:site_name" content="cnilin_blog">
 <meta property="og:description" content="对抗蛇规则通识：1.选手双方各自控制一条蛇，分别由左下角与右下角出发。轮流决策下一步如何走。">
-<meta property="og:updated_time" content="2015-12-26T11:36:28.336Z">
+<meta property="og:updated_time" content="2015-12-26T11:38:55.102Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="对抗蛇规则">
 <meta name="twitter:description" content="对抗蛇规则通识：1.选手双方各自控制一条蛇，分别由左下角与右下角出发。轮流决策下一步如何走。">
@@ -119,6 +119,7 @@
 <h2 id="自言自语">自言自语</h2><p>1.本次比赛中，总步数是有限制的，10000步，而每200步会自动生成一个新的位置。可以利用这点巧妙的扩大优势。比如占优情况下围住食物而不吃，拖延时间。在自动生成新食物之前吃掉食物。这样可以使比赛以总步数限制结束，从而扩大优势。</p>
 <p>2.计算蛇到食物的距离和路径并非那么简单，因为主动撞到对手的蛇，会导致死亡，如果此时对手位于比较好的位置，可以以自己身体对你进行“卡位”。所以，很多人会以为这个主题和贪吃蛇差不多，其实区别非常大，还在考虑“深搜最短路”，“舌头到尾的永久通路”就真out了。</p>
 <p>3.哎。都是算计，假设a队员离此时的食物比较近，而食物比较靠边。b队员蛇可以“包围”角落。最终让a队员虽然吃到了食物，却死在了那里。</p>
+<p>4.大神们是时候发挥了</p>
 <h2 id="接口和编程要求">接口和编程要求</h2><h3 id="1-队员上交为dll动态链接文件。">1.队员上交为dll动态链接文件。</h3><p>（不会写dll？其实很简单，我为大家谢了一个简单够用的编辑方法，大家也可以自己网上查找方法）。</p>
 <p>  <a style="font-family:verdana;font-size:100%;color:green" align="left" href="http://cnilin15.github.io/2015/12/20/c%E8%AF%AD%E8%A8%80%E7%BC%96%E8%AF%91%E5%92%8C%E8%B0%83%E7%94%A8dll/#more" target="_blank" rel="external"> 我写的dll编辑方法，点击此链接</a></p>
 <h3 id="2-队员程序要求：">2.队员程序要求：</h3><p>1.队员需提交两个dll。分别作为两个player。（就是自己的同样的代码，把dll文件名和其中函数名字改一下并编译就可以了）</p>
@@ -134,6 +135,8 @@
 <h3 id="giveplayer结构体">giveplayer结构体</h3><p>smap :为当前的局势数组。其中数字1组成一条蛇，数字3组成另一条蛇，数字2是食物。<br>p1和p2：分别是两人蛇的状态，类型为snack。<br>food：为当前食物坐标。<br>mapsize：为地图尺寸。</p>
 <h3 id="snack_结构体">snack 结构体</h3><p>bodylen :当前蛇的长度。<br>body ：当前蛇身个点的坐标。<br>head :为头部在body中的位置（其实恒为零）。<br>tail ：为尾部在body中的位子。</p>
 <h3 id="point结构体">point结构体</h3><p>不多说，x，y，分别代表。x，y坐标。</p>
+<p></p><p></p><p></p>
+<p></p><p></p><p></p>
 <h4 id="一个较为拙劣的实例代码">一个较为拙劣的实例代码</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">int player_1(giveplayer s)</span><br><span class="line">&#123;</span><br><span class="line">   </span><br><span class="line">    <span class="built_in">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line">够拙劣~~</span><br></pre></td></tr></table></figure>
 <h3 id="请注意">请注意</h3><p>1.在队员编写dll中c文件时，头文件请包含 #include “uselei.h”。</p>
 <p>2.如果在一次队员函数的调用中，队员函数运行时间超过1秒，将直接判死亡。</p>
