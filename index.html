@@ -83,32 +83,36 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2016/01/30/newreadme/" title="" itemprop="url"></a>
+      <a href="/2016/01/30/newreadme/" title="对抗蛇规则" itemprop="url">对抗蛇规则</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="cnilinx" target="_blank" itemprop="author">cnilinx</a>
 		
   <p class="article-time">
-    <time datetime="2016-01-30T05:54:53.322Z" itemprop="datePublished"> 發表於 2016-01-30</time>
+    <time datetime="2016-01-30T05:56:00.000Z" itemprop="datePublished"> 發表於 2016-01-30</time>
     
   </p>
 </header>
     <div class="article-content">
         
-        <h2 id="之前的一系列传参出错的问题，实在是抱歉了，现在基本上已经初步解决致命问题。不过纵使努力寻找，bug在所难免，平台会不断的根据大家的意见更改，而且会不断的升级。">之前的一系列传参出错的问题，实在是抱歉了，现在基本上已经初步解决致命问题。不过纵使努力寻找，bug在所难免，平台会不断的根据大家的意见更改，而且会不断的升级。</h2><h2 id="为方便使用。此次的接口依旧是给大家的giveplayer结构体，声明方法有所改变（其中的body数组大小呦70变为76）一定改一下uselei中的这个大小，之前参数出错的原因主要是在这里-">为方便使用。此次的接口依旧是给大家的giveplayer结构体，声明方法有所改变（其中的body数组大小呦70变为76）一定改一下uselei中的这个大小，之前参数出错的原因主要是在这里.</h2><h2 id="在编写dll函数的时候，为了解决传参出错的问题，传递时用的数组。之后还原成giveplayer结构体即可，其中还原函数我已经帮大家">在编写dll函数的时候，为了解决传参出错的问题，传递时用的数组。之后还原成giveplayer结构体即可，其中还原函数我已经帮大家</h2><p>以子函数的形式写好，大家将其代码放入dll函数之前，在dll函数开始时候调用一次初始化即可，函数名为initin。一下是一个完整的dll主函数的案例，供大家参考。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">#include"uselei.h"</span></span><br><span class="line"><span class="comment">#include&lt;stdio.h&gt;</span></span><br><span class="line"><span class="comment">#include"main.h"</span></span><br><span class="line"></span><br><span class="line">giveplayer ss;</span><br><span class="line"></span><br><span class="line">int initin(int ks[<span class="number">100000</span>])</span><br><span class="line">&#123;</span><br><span class="line">    ss.food.x=ks[<span class="number">0</span>];</span><br><span class="line">    ss.food.y=ks[<span class="number">1</span>];</span><br><span class="line">    ss.mpsize=ks[<span class="number">4</span>];</span><br><span class="line">    <span class="keyword">for</span>(int i=<span class="number">0</span>; i&lt;<span class="number">40</span>; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span>(int j=<span class="number">0</span>; j&lt;<span class="number">40</span>; j++)</span><br><span class="line">        &#123;</span><br><span class="line">            ss.smap[i][j]=ks[i*<span class="number">40</span>+j];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    ss.p1.tail=ks[<span class="number">2000</span>];</span><br><span class="line">    ss.p1.head=ks[<span class="number">2002</span>];</span><br><span class="line">    ss.p1.bodylen=ks[<span class="number">2005</span>];</span><br><span class="line">    <span class="keyword">for</span>(int i=<span class="number">0</span>; i&lt;<span class="number">76</span>; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        ss.p1.body[i].x=ks[<span class="number">2006</span>+<span class="number">2</span>*i];</span><br><span class="line">        ss.p1.body[i].y=ks[<span class="number">2006</span>+<span class="number">2</span>*i+<span class="number">1</span>];</span><br><span class="line">    &#125;</span><br><span class="line">    ss.p2.tail=ks[<span class="number">3000</span>];</span><br><span class="line">    ss.p2.head=ks[<span class="number">3002</span>];</span><br><span class="line">    ss.p2.bodylen=ks[<span class="number">3005</span>];</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>(int i=<span class="number">0</span>; i&lt;<span class="number">76</span>; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        ss.p2.body[i].x=ks[<span class="number">3006</span>+<span class="number">2</span>*i];</span><br><span class="line">        ss.p2.body[i].y=ks[<span class="number">3006</span>+<span class="number">2</span>*i+<span class="number">1</span>];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int player_2(int ks[<span class="number">100000</span>])</span><br><span class="line">&#123;</span><br><span class="line">    initin(ks);   //就是在这里调用一下初始函数。</span><br><span class="line"></span><br><span class="line">    //在这里写大家的程序，直接运用ss即可。</span><br><span class="line">    //比如想获知食物坐标的时候，为：ss.food.x ,ss.food.y</span><br><span class="line">    <span class="built_in">return</span> <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">extern <span class="string">"C"</span> DLL_EXPORT BOOL APIENTRY DllMain(HINSTANCE hinstDLL, DWORD fdwReason, LPVOID lpvReserved)</span><br><span class="line">&#123;</span><br><span class="line">    switch (fdwReason)</span><br><span class="line">    &#123;</span><br><span class="line">    <span class="keyword">case</span> DLL_PROCESS_ATTACH:</span><br><span class="line">        // attach to process</span><br><span class="line">        // <span class="built_in">return</span> FALSE to fail DLL load</span><br><span class="line">        <span class="built_in">break</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">case</span> DLL_PROCESS_DETACH:</span><br><span class="line">        // detach from process</span><br><span class="line">        <span class="built_in">break</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">case</span> DLL_THREAD_ATTACH:</span><br><span class="line">        // attach to thread</span><br><span class="line">        <span class="built_in">break</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">case</span> DLL_THREAD_DETACH:</span><br><span class="line">        // detach from thread</span><br><span class="line">        <span class="built_in">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">return</span> TRUE; // succesful</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>有问题希望大家在群里多多交流，朗讯杯第二轮继续进行。</p>
-
+        <h2 id="之前的一系列传参出错的问题，实在是抱歉了，现在基本上已经初步解决致命问题。不过纵使努力寻找，bug在所难免，平台会不断的根据大家的意见更改，而且会不断的升级。">之前的一系列传参出错的问题，实在是抱歉了，现在基本上已经初步解决致命问题。不过纵使努力寻找，bug在所难免，平台会不断的根据大家的意见更改，而且会不断的升级。</h2>
         
         
         <p class="article-more-link">
+          
+            <a href="/2016/01/30/newreadme/#more">Read More</a>
           
        </p>
     </div>
     <footer class="article-footer clearfix">
 <div class="article-catetags">
 
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/程序随笔/">程序随笔</a>
+  </div>
 
 </div>
 
@@ -570,7 +574,7 @@
 			
 		
 			
-				<li><a href="/tags/程序随笔/" title="程序随笔">程序随笔<sup>2</sup></a></li>
+				<li><a href="/tags/程序随笔/" title="程序随笔">程序随笔<sup>3</sup></a></li>
 			
 		
 			
